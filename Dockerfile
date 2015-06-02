@@ -10,6 +10,6 @@ RUN apt-get update && apt-get install python-pip python-flask -y
 RUN pip install python-memcached
 
 ADD run.py /run.py
-ADD app /
+ADD app/ /app/
 
 EXPOSE 5001
