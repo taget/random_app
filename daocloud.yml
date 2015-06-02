@@ -6,7 +6,7 @@ env:
 
 install:
     - apt-get update
-    - apt-get install pip -y
+    - apt-get install python-pip -y
     - apt-get install python-flask -y
     - pip install python-memcached -y
     - echo $MYENV
