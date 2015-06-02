@@ -48,7 +48,17 @@ def create_random():
 @app.route('/random/<string:code>', methods=['GET'])
 def get_random(code):
     code = random_manager.get_random(code)
+    if code is None:
+        abort(404)
     return jsonify({'code': code})
+
+@app.route('/random/<string:code>', methods=['DELETE'])
+def delete_random(code):
+    code = random_manager.get_random(code)
+    if code is None:
+        abort(404)
+    random_manager.delete_random(code)
+    return jsonify({}), 200
 
 @app.errorhandler(404)
 def not_found(error):
