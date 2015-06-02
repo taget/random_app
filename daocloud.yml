@@ -8,7 +8,7 @@ install:
     - apt-get update
     - apt-get install python-pip -y
     - apt-get install python-flask -y
-    - pip install python-memcached -y
+    - pip install python-memcached
     - echo $MYENV
     - echo "This is an install segment"
     - echo "Here, we usually run scripts to setup a base environment"
