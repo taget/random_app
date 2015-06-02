@@ -3,7 +3,12 @@
 random code as a service
 provide a rest api service.
 
-usage:
+HOW TO RUN
+==========
+python /run.py
+
+HOW TO ACCESS
+=============
 POST
 ====
 genreate a random code:
