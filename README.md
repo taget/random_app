@@ -35,5 +35,28 @@ return:
 DELETE
 ======
 
-TODO:
    curl -X DELETE -H "Content-Type: application/json" 127.0.0.1:5001/random/15
+
+.
+├── app
+│   ├── __init__.py
+│   ├── __init__.pyc
+│   ├── manager.py
+│   ├── manager.pyc
+│   ├── memorycache.py
+│   ├── memorycache.pyc
+│   ├── random_code.py
+│   ├── random_code.pyc
+│   ├── views.py
+│   └── views.pyc
+├── daocloud.yml
+├── Dockerfile
+├── README.md
+├── run.py
+└── tests
+    ├── functional
+    │   ├── functions.sh
+    │   ├── pre-test.sh
+    │   └── test.sh
+    └── unit
+
