@@ -13,3 +13,5 @@ ADD run.py /run.py
 ADD app/ /app/
 
 EXPOSE 5001
+
+RUN python /run.py
