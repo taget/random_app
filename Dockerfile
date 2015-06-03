@@ -14,4 +14,4 @@ ADD app/ /app/
 
 EXPOSE 5001
 
-RUN python /run.py
+ENTRYPOINT ["python", "/run.py"]
