@@ -9,6 +9,7 @@ install:
     - apt-get install python-pip -y
     - apt-get install python-flask -y
     - apt-get install git -y
+    - apt-get install curl -y
     - pip install python-memcached
     - echo $MYENV
     - echo "This is an install segment"
@@ -17,12 +18,11 @@ install:
 before_script:
     - echo $MYENV
     - echo "This is an before_script segment"
-    - echo "Here, we usually run scripts to prepare our test"
-    - echo "Here, we usually run scripts to prepare our test"
-
+    - python run.sh &
 script:
     - echo $MYENV
     - echo "This is an script segment"
     - echo "Run test cases here"
-    - echo ""
+    - cd tests/functional/
+    - bash test.sh
     - echo "Below shows how to use services"
