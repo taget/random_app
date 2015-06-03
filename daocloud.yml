@@ -24,5 +24,5 @@ script:
     - echo "This is an script segment"
     - echo "Run test cases here"
     - cd tests/functional/
-    - bash test.sh
+    - sleep 10 ; bash test.sh
     - echo "Below shows how to use services"
