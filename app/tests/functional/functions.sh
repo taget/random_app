@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-#set -x
+set -x
 CURL='curl -s'
 
 function get {

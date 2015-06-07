@@ -28,9 +28,6 @@ from flask import make_response
 
 random_manager = manager.Manager()
 
-#
-min_ver = version_obj.version_obj('', '1.0')
-max_ver = version_obj.version_obj('', '1.01')
 
 @app.route('/')
 @app.route('/index')
@@ -41,14 +38,12 @@ def index():
 #create a random code with a timeout window
 @app.route('/random', methods=['POST'])
 def create_random():
-    version = request.headers.get('X-Version', 1.0)
+    version = request.headers.get('X-Version', '1.0')
     req = request.json
+    print version
+    print type(version)
     ver = str(version.decode('utf8'))
     ver_req = version_obj.version_obj(req, ver)
-    # TODO only support default_ver now
-    if ver_req > max_ver or ver_req < min_ver:
-        return error_json_out(400, '%s is not support! min=%s, max=%s' 
-                              % (ver_req, min_ver, max_ver))
 
     try:
         validation.validate(ver_req, validation.create_random)
@@ -56,7 +51,9 @@ def create_random():
         timeout = req.get('time_out', 10)
 
         ret = random_manager.create_random(length, timeout=timeout)
-    except exceptions.inValidateInput as e:
+    except (exceptions.inValidateInput,
+            exceptions.VersionNotSupport) as e:
+        print e
         return error_json_out(400, e.message)
     except exceptions.CodeCreateFailed as e:
         return error_json_out(403, e.message)
