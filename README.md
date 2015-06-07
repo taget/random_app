@@ -2,6 +2,7 @@
 
 random code as a service
 provide a rest api service.
+support versioning.
 
 HOW TO RUN
 ==========
@@ -19,9 +20,13 @@ example:
 
    curl -X POST -H "Content-Type: application/json" 127.0.0.1:5001/random -d '{"length": 2, "time_out": 100}'
 
-return:
+return a json:
 
-    "code": "15" ,201
+   {
+  "code": "53", 
+  "time_out": 100, 
+  "uuid": "23022675170252"
+   }
 
 
 GET:
@@ -37,26 +42,13 @@ DELETE
 
    curl -X DELETE -H "Content-Type: application/json" 127.0.0.1:5001/random/15
 
-.
-├── app
-│   ├── __init__.py
-│   ├── __init__.pyc
-│   ├── manager.py
-│   ├── manager.pyc
-│   ├── memorycache.py
-│   ├── memorycache.pyc
-│   ├── random_code.py
-│   ├── random_code.pyc
-│   ├── views.py
-│   └── views.pyc
-├── daocloud.yml
-├── Dockerfile
-├── README.md
-├── run.py
-└── tests
-    ├── functional
-    │   ├── functions.sh
-    │   ├── pre-test.sh
-    │   └── test.sh
-    └── unit
+VERSION SUPPORT
+===============
 
+currently random service support versioning, we need to put a version in Header, eg:
+"X-Version: 1.011", the service will return error if version request is not supported in error message.
+
+curl -X POST -H "Content-Type: application/json" -H "X-Version: 1.011" http://localhost:5001/random -d '{"length": 2, "time_out": 100}'
+{
+  "error": "1.011000 is not support! min=1.000000, max=1.010000"
+}
