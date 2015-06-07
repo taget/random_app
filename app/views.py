@@ -14,11 +14,12 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-
 from app import app
 from app import manager
 from app import validation
 from app import exceptions
+from app import version_obj
+
 
 from flask import abort
 from flask import jsonify
@@ -26,6 +27,10 @@ from flask import request
 from flask import make_response
 
 random_manager = manager.Manager()
+
+#
+min_ver = version_obj.version_obj('', '1.0')
+max_ver = version_obj.version_obj('', '1.01')
 
 @app.route('/')
 @app.route('/index')
@@ -36,12 +41,17 @@ def index():
 #create a random code with a timeout window
 @app.route('/random', methods=['POST'])
 def create_random():
-    print request.json
-    print request.headers
+    version = request.headers.get('X-Version', 1.0)
     req = request.json
-    try:
-        validation.validate(req, validation.create_random)
+    ver = str(version.decode('utf8'))
+    ver_req = version_obj.version_obj(req, ver)
+    # TODO only support default_ver now
+    if ver_req > max_ver or ver_req < min_ver:
+        return error_json_out(400, '%s is not support! min=%s, max=%s' 
+                              % (ver_req, min_ver, max_ver))
 
+    try:
+        validation.validate(ver_req, validation.create_random)
         length = req.get('length')
         timeout = req.get('time_out', 10)
 

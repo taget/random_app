@@ -22,7 +22,8 @@ create_random = {
      'additionalProperties': False,
 }
 
-def validate(json, schema):
+def validate(ver_req, schema):
+    json = ver_req.req
     try:
         jsonschema.validate(json, schema)
     except jsonschema.ValidationError as e:

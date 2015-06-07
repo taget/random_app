@@ -8,3 +8,6 @@ class CodeNotFound(Exception):
 
 class CodeCreateFailed(Exception):
     pass
+
+class VersionNotSupport(Exception):
+    pass
