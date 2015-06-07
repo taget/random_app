@@ -17,6 +17,8 @@
 
 from app import app
 from app import manager
+from app import validation
+from app import exceptions
 
 from flask import abort
 from flask import jsonify
@@ -35,31 +37,41 @@ def index():
 @app.route('/random', methods=['POST'])
 def create_random():
     print request.json
-    if not request.json or not 'length' in request.json:
-        abort(400)
     req = request.json
-    length = req.get('length')
-    timeout = req.get('time_out', 10)
-    code = random_manager.create_random(length, timeout=timeout)
+    try:
+        validation.validate(req, validation.create_random)
 
-    return jsonify({'code': code}), 201
+        length = req.get('length')
+        timeout = req.get('time_out', 10)
+
+        ret = random_manager.create_random(length, timeout=timeout)
+    except exceptions.inValidateInput as e:
+        return error_json_out(404, e.message)
+    except exceptions.CodeCreateFailed as e:
+        return error_json_out(403, e.message)
+    return jsonify(ret), 201
 
 #verify random code exist
 @app.route('/random/<string:code>', methods=['GET'])
 def get_random(code):
-    code = random_manager.get_random(code)
-    if code is None:
-        abort(404)
-    return jsonify({'code': code})
+    try:
+        ret = random_manager.get_random(code)
+    except exceptions.CodeNotFound as e:
+        return error_json_out(404, e.message)
+    return jsonify(ret)
 
 @app.route('/random/<string:code>', methods=['DELETE'])
 def delete_random(code):
-    code = random_manager.get_random(code)
-    if code is None:
-        abort(404)
+    try:
+        ret = random_manager.get_random(code)
+    except exceptions.CodeNotFound as e:
+        return error_json_out(404, e.message)
     random_manager.delete_random(code)
     return jsonify({}), 200
 
 @app.errorhandler(404)
 def not_found(error):
     return make_response("error, not found", 404)
+
+def error_json_out(code, msg):
+    return jsonify({'error': msg}), code

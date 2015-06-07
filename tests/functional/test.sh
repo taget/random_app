@@ -32,3 +32,11 @@ sleep 2
 #### verify it still not exist$
 get $code
 check_error "get invalid $code" 1
+
+
+########################################
+# test create code length=1 and timeout=20
+# for code lenght is 1, there can only be
+# 10 codes, so 11th post will be failed
+########################################
+source $RUN_DIR/test_create_no_enough_code.sh

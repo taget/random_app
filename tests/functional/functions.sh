@@ -52,7 +52,7 @@ function verify_length {
 # $2 option , default is 0, if set to 1
 function check_error {
     if [[ $? -ne 0 ]]; then
-        local CMP=$2-0
+        local CMP=${2-0}
         if [[ $CMP -eq 0 ]]; then
             echo "!!!! Failed out: $1 failed!"
             exit 1
@@ -60,7 +60,7 @@ function check_error {
             echo ":-) $1 Done!"
         fi
     else
-        local CMP=$2-0
+        local CMP=${2-0}
         if [[ $CMP -eq 0 ]]; then
             echo ":-) $1 Done!"
         else
