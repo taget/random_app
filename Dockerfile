@@ -10,6 +10,9 @@ RUN apt-get update && apt-get install python-pip python-flask python-jsonschema 
 RUN pip install python-memcached
 RUN pip install logging
 
+# this is log file
+RUN touch /random-debug.log
+
 ADD run.py /run.py
 ADD app/ /app/
 

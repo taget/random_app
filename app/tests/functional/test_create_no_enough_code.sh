@@ -8,7 +8,7 @@ source $RUN_DIR/functions.sh
 ### create 10 code lenght is 1 code, then 11 should be failed.
 
 for i in $(seq 10); do
-    code=$(post 1 20)
+    code=$(post 1 100)
     check_error "create $i code"
 done
 code=$(post 1 20)
