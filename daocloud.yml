@@ -12,6 +12,7 @@ install:
     - apt-get install curl -y
     - apt-get install python-jsonschema -y
     - pip install python-memcached
+    - pip install logging
     - echo $MYENV
     - echo "This is an install segment"
     - echo "Here, we usually run scripts to setup a base environment"
