@@ -10,6 +10,7 @@ install:
     - apt-get install python-flask -y
     - apt-get install git -y
     - apt-get install curl -y
+    - apt-get install python-jsonschema -y
     - pip install python-memcached
     - echo $MYENV
     - echo "This is an install segment"
