@@ -37,6 +37,7 @@ def index():
 @app.route('/random', methods=['POST'])
 def create_random():
     print request.json
+    print request.headers
     req = request.json
     try:
         validation.validate(req, validation.create_random)
@@ -46,7 +47,7 @@ def create_random():
 
         ret = random_manager.create_random(length, timeout=timeout)
     except exceptions.inValidateInput as e:
-        return error_json_out(404, e.message)
+        return error_json_out(400, e.message)
     except exceptions.CodeCreateFailed as e:
         return error_json_out(403, e.message)
     return jsonify(ret), 201
