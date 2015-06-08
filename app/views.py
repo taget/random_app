@@ -26,6 +26,7 @@ from flask import abort
 from flask import jsonify
 from flask import request
 from flask import make_response
+from flask import render_template
 
 random_manager = manager.Manager()
 
@@ -35,8 +36,7 @@ LOG = log.getLogger(__name__)
 @app.route('/')
 @app.route('/index')
 def index():
-    print app.app_context()
-    return "hello world!"
+    return render_template('hello.html')
 
 #create a random code with a timeout window
 @app.route('/random', methods=['POST'])

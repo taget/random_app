@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+    <title>random_app</title>
+</head>
+<body>
+    <ul id="navigation">
+    {% for item in navigation %}
+        <li><a href="{{ item.href }}">{{ item.caption }}</a></li>
+    {% endfor %}
+    </ul>
+
+    <h1>验证码 as a service</h1>
+    <div id="content">让您失望了，我这个服务没有界面</div>
+    <div>参考文档在这里
+        <a href="https://github.com/taget/random_app/blob/master/README.md">README</a>
+    </div>
+</body>
+</html>
