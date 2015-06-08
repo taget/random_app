@@ -11,6 +11,7 @@ install:
     - apt-get install git -y
     - apt-get install curl -y
     - apt-get install python-jsonschema -y
+    - apt-get install python-redis -y
     - pip install python-memcached
     - pip install logging
     - echo $MYENV

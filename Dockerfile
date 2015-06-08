@@ -6,7 +6,7 @@ FROM      ubuntu
 MAINTAINER Eli qiao <taget@163.com>
 
 LABEL Description="Base image run randmo app" Vendor="Eli's BOOK" Version="1.0"
-RUN apt-get update && apt-get install python-pip python-flask python-jsonschema -y
+RUN apt-get update && apt-get install python-pip python-flask python-jsonschema python-redis -y
 RUN pip install python-memcached
 RUN pip install logging
 
