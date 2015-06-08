@@ -22,9 +22,7 @@ before_script:
     - echo "This is an before_script segment"
 script:
     - echo "first to run unit test"
-    - cd tests/unit
-    - python test.py
-    - cd -
+    - cd bash unit_test.sh
     - python run.py &
     - echo "This is an script segment"
     - echo "Run test cases here"
