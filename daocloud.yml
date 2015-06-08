@@ -2,7 +2,7 @@ image: ubuntu:14.04
 
 
 env:
-    - MYENV = "hello"
+    - mc = "db"
 
 install:
     - apt-get update
@@ -18,13 +18,16 @@ install:
     - echo "Here, we usually run scripts to setup a base environment"
 
 before_script:
-    - echo $MYENV
+    - echo we use $mc as db backend
     - echo "This is an before_script segment"
 script:
-    - echo $MYENV
+    - echo "first to run unit test"
+    - cd tests/unit
+    - python test.py
+    - cd -
     - python run.py &
     - echo "This is an script segment"
     - echo "Run test cases here"
-    - cd app/tests/functional/
+    - cd tests/functional/
     - sleep 10 ; bash test.sh
     - echo "Below shows how to use services"
