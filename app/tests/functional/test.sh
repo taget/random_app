@@ -39,4 +39,9 @@ check_error "get invalid $code" 1
 # for code lenght is 1, there can only be
 # 10 codes, so 11th post will be failed
 ########################################
-source $RUN_DIR/test_create_no_enough_code.sh
+#source $RUN_DIR/test_create_no_enough_code.sh
+
+########################################
+# test create code with version header
+########################################
+source $RUN_DIR/test_version_not_support.sh

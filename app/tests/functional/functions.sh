@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-set -x
+#set -x
 CURL='curl -s'
 
 function get {
@@ -20,6 +20,20 @@ function post {
     local LENGTH=$1
     local TIME_OUT=$2
     local ret=$($CURL -H "Content-Type: application/json" -X POST 127.0.0.1:5001/random -d "{\"length\": $LENGTH, \"time_out\": $TIME_OUT}")
+    local CODE=$(echo $ret | awk -F\" '{print $4}')
+    verify_length $CODE $LENGTH
+    if [[ $? -ne 0 ]]; then
+        return 1
+    fi
+    echo $CODE
+    return 0
+}
+
+function post_with_version {
+    local LENGTH=$1
+    local TIME_OUT=$2
+    local VERSION=$3
+    local ret=$($CURL -H "Content-Type: application/json" -H "X-Version: $VERSION" -X POST 127.0.0.1:5001/random -d "{\"length\": $LENGTH, \"time_out\": $TIME_OUT}")
     local CODE=$(echo $ret | awk -F\" '{print $4}')
     verify_length $CODE $LENGTH
     if [[ $? -ne 0 ]]; then
