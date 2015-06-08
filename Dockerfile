@@ -14,9 +14,9 @@ RUN pip install logging
 RUN touch /random-debug.log
 
 ADD run.py /run.py
+ADD run.sh /run.sh
 ADD app/ /app/
 
 EXPOSE 5001
 
-ENTRYPOINT ["python", "/run.py"]
-ENTRYPOINT ["tail", "-f", "/random-debug.log"]
+ENTRYPOINT ["bash", "/run.py"]
