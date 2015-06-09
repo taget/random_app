@@ -29,7 +29,7 @@ class Client(object):
         self.host = conf.get('host')
         self.port = conf.get('port')
         self.password = conf.get('password')
-        self.db = conf.get('db', 1)
+        self.db = int(conf.get('db', 1))
         try:
             self.client = redis.Redis(host=self.host,
                                       port=self.port,
