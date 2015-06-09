@@ -2,7 +2,7 @@ image: ubuntu:14.04
 
 
 env:
-    - db_backend = "redis"
+    - db_backend = "mc"
     - host = "10.10.71.37"
     - password = "pTMRG4zepK"
     - port = "49508"
