@@ -16,22 +16,23 @@ class Manager(object):
         if conf.get('db') == 'mc':
             from app import memorycache
             self.driver = memorycache.get_client()
+        elif conf.get('db') == 'redis':
+            from app import redis_client
+            self.driver = redis_client.Client()
 
     def create_random(self, length, timeout=10):
 
         for i in range(MAX_RETRY):
             code = random_code.get_random_str(length)
-            code_exist = self.driver.get(code)
-            if not code_exist:
-                val = int(uuid.uuid4()) % 100000000000000
-                data_dict = {'uuid': str(val)}
-                data = json.dumps(data_dict)
+            val = int(uuid.uuid4()) % 100000000000000
+            data_dict = {'uuid': str(val)}
+            data = json.dumps(data_dict)
+            if self.driver.add(code, data, timeout):
                 break
         else:
             # TODO(eliqiao): we may need to avoid this by adding uuid
             raise exceptions.CodeCreateFailed("no enough code can be created!")
 
-        self.driver.set(code, data, timeout)
         return {"code": code, "time_out": timeout, "uuid": str(val)}
 
     def get_random(self, code):
