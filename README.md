@@ -6,7 +6,16 @@ support versioning.
 
 HOW TO RUN
 ==========
+by default, this service will use local memcache as backend.
 python /run.py
+
+and it supports redis service.
+then you need to set environment variable
+
+db_backend=redis
+host=${redis_host_ip}
+port=${redis_port}
+password=${redis_password}
 
 HOW TO ACCESS
 =============
