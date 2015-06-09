@@ -14,7 +14,10 @@ class app_config(object):
         'db_backend': 'mc',
         }
 
-    def get(self, var):
+    def get(self, var, val=None):
         """get variable
         """
-        return os.getenv(var, self._default_var.get(var))
+        ret = os.getenv(var, self._default_var.get(var))
+        if ret is None and val is not None:
+            return val
+        return ret
