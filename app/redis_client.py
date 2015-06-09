@@ -30,6 +30,14 @@ class Client(object):
         self.port = conf.get('port')
         self.password = conf.get('password')
         self.db = int(conf.get('db', 1))
+        print self.host
+        print type(self.host)
+        print self.port
+        print type(self.port)
+        print self.password
+        print type(self.password)
+        print self.db
+        print type(self.db)
         try:
             self.client = redis.Redis(host=self.host,
                                       port=self.port,
