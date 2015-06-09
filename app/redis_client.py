@@ -30,24 +30,16 @@ class Client(object):
         self.port = int(conf.get('port'))
         self.password = conf.get('password')
         self.db = int(conf.get('db', 1))
-        print self.host
-        print type(self.host)
-        print self.port
-        print type(self.port)
-        print self.password
-        print type(self.password)
-        print self.db
-        print type(self.db)
         try:
             self.client = redis.Redis(host=self.host,
                                       port=self.port,
                                       password=self.password,
                                       db=self.db)
+            self.client.ping()
         # FIXME need to catch specify exception
         except Exception as e:
-            print e
+            arint e
             raise
-        print self.client.ping()
 
     def get(self, key):
         """Retrieves the value for a key or None.

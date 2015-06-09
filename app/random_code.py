@@ -6,11 +6,12 @@ def get_random(length):
     """
     if length == 0:
         return 0
-    left = 10 ** (length -1)
     right = 10 ** length  - 1
-
-    return random.randint(left, right)
+    return random.randint(0, right)
 
 def get_random_str(length):
-    return str(get_random(length))
+    i = get_random(length)
+    s = "%0" + "%dd"  % length
+    # s = "%0xd", x is length
+    return s % i
 
