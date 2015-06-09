@@ -38,7 +38,7 @@ class Client(object):
             self.client.ping()
         # FIXME need to catch specify exception
         except Exception as e:
-            arint e
+            print e
             raise
 
     def get(self, key):
