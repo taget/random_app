@@ -11,7 +11,7 @@ class app_config(object):
 
     def __init__(self):
         self._default_var = {
-        'db': 'mc',
+        'db_backend': 'mc',
         }
 
     def get(self, var):

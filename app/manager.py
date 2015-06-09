@@ -13,10 +13,10 @@ conf = config.app_config()
 class Manager(object):
 
     def __init__(self):
-        if conf.get('db') == 'mc':
+        if conf.get('db_backend') == 'mc':
             from app import memorycache
             self.driver = memorycache.get_client()
-        elif conf.get('db') == 'redis':
+        elif conf.get('db_backend') == 'redis':
             from app import redis_client
             self.driver = redis_client.Client()
 
