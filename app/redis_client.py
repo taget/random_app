@@ -52,10 +52,11 @@ class Client(object):
         """Sets the value for a key."""
         try:
             self.client[key] = value
-            r.expire(key, time)
+            self.client.expire(key, time)
         except Exception as e:
             print e
             raise
+        return key
 
     def add(self, key, value, time=0, min_compress_len=0):
         """Sets the value for a key if it doesn't exist."""
