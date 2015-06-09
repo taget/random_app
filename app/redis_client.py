@@ -27,7 +27,7 @@ class Client(object):
     def __init__(self, *args, **kwargs):
         """Ignores the passed in args."""
         self.host = conf.get('host')
-        self.port = conf.get('port')
+        self.port = int(conf.get('port'))
         self.password = conf.get('password')
         self.db = int(conf.get('db', 1))
         print self.host
@@ -47,6 +47,7 @@ class Client(object):
         except Exception as e:
             print e
             raise
+        print self.client.ping()
 
     def get(self, key):
         """Retrieves the value for a key or None.
